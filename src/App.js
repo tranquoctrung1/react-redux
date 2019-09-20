@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import News from './news';
+import { connect } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//declare in the outside of component
+const mapStateToProps = (state , ownProps) => {
+  return {
+    // this.props.data and this.props.dispatch() to dispatch actions
+    data: state.device
+  }
+}
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       
+    }
+  }
+
+  render() {
+    var {data} = this.props
+    data = data.join(' ');
+    return (
+      <div className="App">
+        <div>{data}</div>
+        <hr></hr>
+        <News></News>
+      </div>
+    )
+  }
+
 }
 
-export default App;
+// use this line to connet mapStateToProps method
+export default connect(mapStateToProps)(App);
